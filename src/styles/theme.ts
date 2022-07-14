@@ -10,6 +10,16 @@ const colors = {
   },
 }
 
-const theme = extendTheme({ colors })
+const config = {
+    initialColorMode: 'dark',
+    useSystemColorMode: false,
+}
+
+const fonts = {
+    heading: `'Coalition', sans-serif`,
+    body: `'FutureLight', sans-serif`,
+}
+
+const theme = extendTheme({ config, colors, fonts })
 
 export default theme
