@@ -18,6 +18,8 @@ import {
     useColorMode,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import store from '../../store/index';
+import { observer } from 'mobx-react';
 
 const Links = ['Dashboard', 'Projects', 'Team'];
 
@@ -35,31 +37,42 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     </Link>
 );
 
-export default function Nav() {
+type Props = {
+    onShowSidebar: () => void;
+}
+
+const Nav = ({onShowSidebar}:Props) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const close = () => {
+        store.map.setSidebarOpen('left', !store.map.sidebar.left)
+    }
     return (
         <>
-            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+            <Box position={'fixed'} zIndex="100" width="100%" bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
-                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+                        icon={store.map.sidebar.left ? <CloseIcon /> : <HamburgerIcon />}
                         aria-label={'Open Menu'}
                         display={{ md: 'none' }}
-                        onClick={isOpen ? onClose : onOpen}
+                        onClick={close}
                     />
                     <HStack spacing={8} alignItems={'center'}>
-                        <Box>Logo</Box>
-                        
-                        <HStack
+                        <Button onClick={()=>{
+                            close()
+                        }} ><HamburgerIcon /></Button>
+                        <Box>
+                            
+                        </Box>
+                        {/* <HStack
                             as={'nav'}
                             spacing={4}
                             display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
                                 <NavLink key={link}>{link}</NavLink>
                             ))}
-                        </HStack>
+                        </HStack> */}
                     </HStack>
                     <Flex alignItems={'center'}>
                         <Button onClick={toggleColorMode} mr='2' >
@@ -101,3 +114,5 @@ export default function Nav() {
         </>
     );
 }
+
+export default observer(Nav)
