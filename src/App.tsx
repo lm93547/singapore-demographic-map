@@ -14,25 +14,39 @@ import {useEffect, useState} from 'react';
 import { authenticateApi } from './utils/API/authenticateApi';
 import Fonts from "./styles/Fonts";
 import { dataFetching } from "./utils/API/dataFetching";
+import { autorun, toJS } from 'mobx';
 
 function App() {
     const [oneMapToken, setOneMapToken] = useState('')
 
-    const response = async () => {
+    const regionResponse = async () => {
         const allRegionArray = await dataFetching('getRegions', oneMapToken)
         store.map.setRegions(allRegionArray)
     }
 
+    const weatherResponse = async () => {
+        const weather = await dataFetching('getWeather')
+        store.map.setWeather(weather)
+    }
+
     useEffect(()=>{
         authenticateApi('onemap').then((res:any) => {setOneMapToken(res.access_token)});
+        weatherResponse()
     }, [])
 
     useEffect(() => {
         store.auth.setTokens({onemap: oneMapToken, ura: ''});
         if(oneMapToken !== ""){
-            response()
+            regionResponse()
         }
     }, [oneMapToken])
+
+    useEffect(() => {
+      autorun(()=>{
+        console.log(toJS(store.map.weather))
+      })
+    }, [])
+    
 
     
   return (
