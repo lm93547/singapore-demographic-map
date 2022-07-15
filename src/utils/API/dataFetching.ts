@@ -9,9 +9,7 @@ export const dataFetching = async (type: "getRegions" | "getWeather", token: str
     if(type === "getRegions"){
         let url = urlToMethodMapping[type];
         url += token;
-        console.log("🚀 ~ file: dataFetching.ts ~ line 11 ~ dataFetching ~ url", url)
         const regionResponse = await ky.get(url).json();
-        console.log("🚀 ~ file: dataFetching.ts ~ line 13 ~ dataFetching ~ regionResponse", regionResponse)
         return regionResponse;
     }
     if(type === "getWeather"){
