@@ -16,9 +16,9 @@ const StationList = (props: Props) => {
             <Heading size="md" >Station List</Heading>
             {stations.map((station: any) => {
                 return (
-                    <Button borderBottomColor={station.properties.station_colors} maxW='80%' mb="2" p="4" variant='outline' onClick={()=>{
+                    <Button key={station.properties.name} data-testid="station-btn" borderBottomColor={station.properties.station_colors} maxW='80%' mb="2" p="4" variant='outline' onClick={()=>{
                         store.map.setClickedStation(station.geometry.coordinates, 14)
-                    }}><Text fontFamily="ROBO" >{station.properties.name}/{station.properties['name_zh-Hans']}</Text></Button>
+                    }}><Text fontFamily="FutureLight" >{station.properties.name} / {station.properties['name_zh-Hans']}</Text></Button>
                 )
             })}
         </Flex>
