@@ -37,11 +37,9 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     </Link>
 );
 
-type Props = {
-    onShowSidebar: () => void;
-}
+type Props = {}
 
-const Nav = ({onShowSidebar}:Props) => {
+const Nav = ({}:Props) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const close = () => {
@@ -49,7 +47,7 @@ const Nav = ({onShowSidebar}:Props) => {
     }
     return (
         <>
-            <Box position={'fixed'} zIndex="100" width="100%" bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+            <Box data-testid="nav" position={'fixed'} zIndex="100" width="100%" bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
