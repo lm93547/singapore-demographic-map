@@ -43,7 +43,7 @@ const MapComponent = (props: Props) => {
     
 
     return (
-        <div id="map" >
+        <div id="map" data-testid="map" >
             <DeckGL 
                 initialViewState={viewState} 
                 controller={true}
@@ -62,7 +62,7 @@ const MapComponent = (props: Props) => {
                     </Text>
                     </Box>
                 )}
-            </DeckGL>;
+            </DeckGL>
         </div>
     )
 }
