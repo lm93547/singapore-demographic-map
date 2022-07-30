@@ -8,6 +8,7 @@ class MapStore {
     clickedStation: [number, number] = [103.851959, 1.290270];
     layerVis = {mrt: false, pcn: false, region: false}
     sidebar = {left: false, right: false}
+    weather: any = {}
     tooltip: any = {}
     regions: any = []
     zoom = 11
@@ -38,6 +39,10 @@ class MapStore {
 
     setSidebarOpen(side: string, open: boolean){
         this.sidebar[side] = open;
+    }
+
+    setWeather(weather: any){
+        this.weather = weather;
     }
 }
 
