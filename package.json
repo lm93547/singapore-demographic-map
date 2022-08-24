@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/icons": "^2.0.9",
     "@chakra-ui/react": "^1.8.8",
     "@danmarshall/deckgl-typings": "^4.9.24",
     "@deck.gl/core": "^8.8.2",
